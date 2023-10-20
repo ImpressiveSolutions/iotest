@@ -77,11 +77,13 @@ print_io_test() {
         freespace=$(df -m . | awk 'NR==3 {print $3}')
     fi
     if [ ${freespace} -gt 1024 ]; then
-        writemb=2048
+        writemb=8000
         io1=$(io_test ${writemb})
         echo " I/O Speed(1st run) : $(_yellow "$io1")"
+        writemb=32000
         io2=$(io_test ${writemb})
         echo " I/O Speed(2nd run) : $(_yellow "$io2")"
+        writemb=64000
         io3=$(io_test ${writemb})
         echo " I/O Speed(3rd run) : $(_yellow "$io3")"
         ioraw1=$(echo $io1 | awk 'NR==1 {print $1}')
